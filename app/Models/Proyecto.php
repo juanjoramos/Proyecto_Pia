@@ -21,11 +21,9 @@ class Proyecto extends Model {
         return $this->belongsTo(TipoProyecto::class, 'id_tipo_proyecto');
     }
 
-    public function asignaturas()
+    public function asignaturasAsignadas()
     {
-        return $this->belongsToMany(Asignatura::class, 'proyecto_asignaturas')
-                    ->withPivot('grupo', 'docente_id')
-                    ->withTimestamps();
+        return $this->hasMany(ProyectoAsignatura::class, 'proyecto_id');
     }
 
     public function evaluaciones()

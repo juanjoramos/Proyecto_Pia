@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model; // Esta es la línea que debe estar presente
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Evaluador extends Model
 {
     use HasFactory;
 
     protected $table = 'evaluadores';
-
     protected $primaryKey = 'evaluador_id';
-
     public $incrementing = true;
     protected $keyType = 'int';
 

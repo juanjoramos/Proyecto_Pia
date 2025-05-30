@@ -85,7 +85,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('entregables', EntregableController::class);
     Route::resource('tipo_entregables', TipoEntregableController::class);
-    Route::resource('proyecto_asignaturas', ProyectoAsignaturaController::class);
+    Route::resource('proyecto_asignaturas', ProyectoAsignaturaController::class)->parameters([
+        'proyecto_asignaturas' => 'proyecto_asignatura'
+    ]);
     Route::resource('proyecto_evaluaciones', ProyectoEvaluacionController::class);
 });
 

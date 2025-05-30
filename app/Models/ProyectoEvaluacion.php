@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model; // Esta es la línea que debe estar presente
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class ProyectoEvaluacion extends Model
 {
     use HasFactory;
 
-    protected $table = 'proyecto_evaluaciones';
+        protected $table = 'proyecto_evaluaciones';
 
     protected $fillable = [
         'proyecto_id',
@@ -18,20 +18,19 @@ class ProyectoEvaluacion extends Model
         'resultados_criterios',
     ];
 
-    // Relaciones
+public function proyecto()
+{
+    return $this->belongsTo(Proyecto::class, 'proyecto_id');
+}
 
-    public function proyecto()
-    {
-        return $this->belongsTo(Proyecto::class);
-    }
 
-    public function evaluacion()
-    {
-        return $this->belongsTo(Evaluacion::class);
-    }
+public function evaluacion()
+{
+    return $this->belongsTo(Evaluacion::class, 'evaluacion_id');
+}
 
     public function evaluador()
     {
-        return $this->belongsTo(Evaluador::class);
+        return $this->belongsTo(Evaluador::class, 'evaluador_id');
     }
 }

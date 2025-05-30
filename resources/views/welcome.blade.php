@@ -102,9 +102,7 @@
                                         <div class="pt-3 sm:pt-5 lg:pt-0">
                                             <h2 class="text-xl font-semibold text-black dark:text-white">Equipo F</h2>
 
-                                            <p class="mt-4 text-sm/relaxed">
-                                                Laravel has wonderful documentation covering every aspect of the framework. Whether you are a newcomer or have prior experience with Laravel, we recommend reading our documentation from beginning to end.
-                                            </p>
+                                            <p class="mt-4 text-sm/relaxed">ET0179 - Desarrollo Web con Nuevas Tecnologías de la institución Pascual Bravo.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -119,8 +117,7 @@
                                             <h2 class="text-xl font-semibold text-black dark:text-white">Proyecto PIA</h2>
 
                                             <p class="mt-4 text-sm/relaxed">
-                                                Laravel has wonderful documentation covering every aspect of the framework. Whether you are a newcomer or have prior experience with Laravel, we recommend reading our documentation from beginning to end.
-                                            </p>
+Este proyecto fue desarrollado por el Equipo F para el curso ET0179 - Desarrollo Web con Nuevas Tecnologías de la institución Pascual Bravo. El objetivo principal es gestionar los proyectos de aula a través de un sistema web, implementando herramientas modernas como Laravel, Breeze, Tailwind y Spatie.                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -137,9 +134,7 @@
                                 <div class="pt-3 sm:pt-5">
                                     <h2 class="text-xl font-semibold text-black dark:text-white">Juan José Ramos</h2>
 
-                                    <p class="mt-4 text-sm/relaxed">
-                                        Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                                    </p>
+                                    <p class="mt-4 text-sm/relaxed">Tecnologia Desarrollo de Software</br>Desarrollo Web con Nuevas Tecnologia</br>Equipo F</p>
                                 </div>
                             </a>
 
@@ -154,9 +149,8 @@
                                 <div class="pt-3 sm:pt-5">
                                     <h2 class="text-xl font-semibold text-black dark:text-white">Ximena Zamudio</h2>
 
-                                    <p class="mt-4 text-sm/relaxed">
-                                        Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                                    </p>
+                                    <p class="mt-4 text-sm/relaxed">Tecnologia Desarrollo de Software</br>Desarrollo Web con Nuevas Tecnologia</br>Equipo F</p>
+
                                 </div>
                             </a>
 
@@ -171,9 +165,8 @@
                                 <div class="pt-3 sm:pt-5">
                                     <h2 class="text-xl font-semibold text-black dark:text-white">Jairo Cañaveral</h2>
 
-                                    <p class="mt-4 text-sm/relaxed">
-                                        Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                                    </p>
+                                    <p class="mt-4 text-sm/relaxed">Tecnologia Desarrollo de Software</br>Desarrollo Web con Nuevas Tecnologia</br>Equipo F</p>
+
                                 </div>
                             </a>
 
@@ -188,9 +181,8 @@
                                 <div class="pt-3 sm:pt-5">
                                     <h2 class="text-xl font-semibold text-black dark:text-white">Estiven Toro</h2>
 
-                                    <p class="mt-4 text-sm/relaxed">
-                                        Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                                    </p>
+                                    <p class="mt-4 text-sm/relaxed">Tecnologia Desarrollo de Software</br>Desarrollo Web con Nuevas Tecnologia</br>Equipo F</p>
+
                                 </div>
                             </a>
                         </div>

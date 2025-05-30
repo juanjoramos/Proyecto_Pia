@@ -10,8 +10,7 @@
             <!-- Valor -->
             <div class="mb-4">
                 <label class="block font-bold">Valor</label>
-                <input id="valor" type="number" step="1" name="valor" value="{{ old('valor', intval($ira->valor)) }}" class="w-full border p-2 rounded" required>
-                @error('valor')
+                <input id="valor" type="number" step="1" name="valor" value="{{ old('valor') }}" class="w-full border p-2 rounded" required>                @error('valor')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>

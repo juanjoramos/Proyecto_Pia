@@ -49,10 +49,19 @@ class TipoProyectoController extends Controller {
                          ->with('success', 'Tipo de proyecto actualizado.');
     }
 
-    public function destroy(TipoProyecto $tipoProyecto) {
-        $tipoProyecto->delete();
-
-        return redirect()->route('tipo-proyectos.index')
-                         ->with('success', 'Tipo de proyecto eliminado.');
+public function destroy(TipoProyecto $tipoProyecto) {
+    // Verificar si hay proyectos relacionados
+    if ($tipoProyecto->proyectos()->count() > 0) {
+        // Eliminar proyectos asociados
+        $tipoProyecto->proyectos()->delete();
     }
+
+    // Eliminar el tipo de proyecto
+    $tipoProyecto->delete();
+
+    return redirect()->route('tipo-proyectos.index')
+                     ->with('success', 'Tipo de proyecto y proyectos relacionados eliminados correctamente.');
+}
+
+
 }

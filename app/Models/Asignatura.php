@@ -24,7 +24,7 @@ class Asignatura extends Model
 
     public function programa()
     {
-        return $this->belongsTo(Programa::class, 'programa_id', 'id');
+        return $this->belongsTo(Programa::class, 'programa_id', 'programa_id');
     }
 
     public function proyectos()
