@@ -53,10 +53,10 @@ Proyecto_Pia/
 
 ## 👤 Responsabilidades por Integrante
 
-- **Estiven Toro**: Migraciones, controladores, rutas, lógica CRUD.
-- **Ximena Zamudio**: Manual del sistema, presentación en video.
-- **John Jairo Cañaveral**: Desarrollo de vistas Blade, diseño de interfaz.
-- **Juan José Ramos**: Autenticación, roles y permisos con Spatie.
+- **Estiven Toro**: Migraciones, rutas, diseño de interfaz, lógica CRUD.
+- **Ximena Zamudio**: Manual del sistema, presentación en video, Modelo Conceptual.
+- **John Jairo Cañaveral**: Autenticación, roles y permisos con Spatie, Diccionario de Datos.
+- **Juan José Ramos**: Desarrollo de vistas Blade, controladores, Models.
 
 ---
 
