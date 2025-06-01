@@ -1,39 +1,59 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Nuevo Entregable</h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-white leading-tight">Nuevo Entregable</h2>
+            <a href="{{ route('dashboard') }}"
+               class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600 transition">
+                ← Volver al Menú Principal
+            </a>
+        </div>
     </x-slot>
 
-    <div class="py-12 px-6">
-        <form action="{{ route('entregables.store') }}" method="POST" class="bg-white p-6 rounded shadow-md max-w-xl">
+    <div class="py-12 px-6 flex justify-center bg-gray-900">
+        <form action="{{ route('entregables.store') }}" method="POST"
+              class="bg-gray-800 w-full max-w-2xl p-8 rounded-2xl shadow-lg text-white">
             @csrf
 
-            <div class="mb-4">
-                <label for="nombre" class="block font-bold">Nombre</label>
-                <input id="nombre" type="text" name="nombre" value="{{ old('nombre') }}" class="w-full border p-2 rounded" required>
+            <h3 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2">Registrar Nuevo Entregable</h3>
+
+            {{-- Nombre --}}
+            <div class="mb-5">
+                <label for="nombre" class="block mb-2 font-semibold">Nombre</label>
+                <input id="nombre" type="text" name="nombre" value="{{ old('nombre') }}"
+                       class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                       required>
                 @error('nombre')
-                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="mb-4">
-                <label for="descripcion" class="block font-bold">Descripción</label>
-                <textarea id="descripcion" name="descripcion" class="w-full border p-2 rounded" rows="4">{{ old('descripcion') }}</textarea>
+            {{-- Descripción --}}
+            <div class="mb-5">
+                <label for="descripcion" class="block mb-2 font-semibold">Descripción</label>
+                <textarea id="descripcion" name="descripcion" rows="4"
+                          class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">{{ old('descripcion') }}</textarea>
                 @error('descripcion')
-                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="mb-4">
-                <label for="fecha_entrega" class="block font-bold">Fecha de Entrega</label>
-                <input id="fecha_entrega" type="date" name="fecha_entrega" value="{{ old('fecha_entrega') }}" class="w-full border p-2 rounded" required>
+            {{-- Fecha de Entrega --}}
+            <div class="mb-5">
+                <label for="fecha_entrega" class="block mb-2 font-semibold">Fecha de Entrega</label>
+                <input id="fecha_entrega" type="date" name="fecha_entrega" value="{{ old('fecha_entrega') }}"
+                       class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                       required>
                 @error('fecha_entrega')
-                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="mb-4">
-                <label for="proyecto_id" class="block font-bold">Proyecto</label>
-                <select id="proyecto_id" name="proyecto_id" class="w-full border p-2 rounded" required>
+            {{-- Proyecto --}}
+            <div class="mb-5">
+                <label for="proyecto_id" class="block mb-2 font-semibold">Proyecto</label>
+                <select id="proyecto_id" name="proyecto_id"
+                        class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        required>
                     <option value="">Selecciona un proyecto</option>
                     @foreach($proyectos as $proyecto)
                         <option value="{{ $proyecto->id }}" {{ old('proyecto_id') == $proyecto->id ? 'selected' : '' }}>
@@ -42,13 +62,16 @@
                     @endforeach
                 </select>
                 @error('proyecto_id')
-                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="mb-4">
-                <label for="tipo_entregable_id" class="block font-bold">Tipo de Entregable</label>
-                <select id="tipo_entregable_id" name="tipo_entregable_id" class="w-full border p-2 rounded" required>
+            {{-- Tipo de Entregable --}}
+            <div class="mb-6">
+                <label for="tipo_entregable_id" class="block mb-2 font-semibold">Tipo de Entregable</label>
+                <select id="tipo_entregable_id" name="tipo_entregable_id"
+                        class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        required>
                     <option value="">Selecciona un tipo</option>
                     @foreach($tiposEntregable as $tipo)
                         <option value="{{ $tipo->tipo_entregable_id }}" {{ old('tipo_entregable_id') == $tipo->tipo_entregable_id ? 'selected' : '' }}>
@@ -57,12 +80,21 @@
                     @endforeach
                 </select>
                 @error('tipo_entregable_id')
-                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Guardar</button>
-            <a href="{{ route('entregables.index') }}" class="ml-4 text-gray-700">Cancelar</a>
+            {{-- Botones --}}
+            <div class="flex justify-end space-x-4">
+                <a href="{{ route('entregables.index') }}"
+                   class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 transition">
+                    Cancelar
+                </a>
+                <button type="submit"
+                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                    Guardar
+                </button>
+            </div>
         </form>
     </div>
 </x-app-layout>

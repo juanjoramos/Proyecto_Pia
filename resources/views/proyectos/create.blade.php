@@ -1,90 +1,124 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Nuevo Proyecto</h2>
-        
-        <a href="{{ route('dashboard') }}"
-            class="inline-block bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800 mb-4">
-            ← Volver al Menú Principal
-        </a>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-white leading-tight">Nuevo Proyecto</h2>
+            <a href="{{ route('dashboard') }}"
+               class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600 transition">
+                ← Volver al Menú Principal
+            </a>
+        </div>
     </x-slot>
 
-    <div class="py-12 px-6">
-        <form action="{{ route('proyectos.store') }}" method="POST" 
-                class="bg-white p-6 rounded shadow-md max-w-xl">
+    {{-- Quitamos min-h-screen para que el fondo no se extienda más allá de los botones --}}
+    <div class="py-12 px-6 flex justify-center bg-gray-900">
+        <form action="{{ route('proyectos.store') }}" method="POST"
+              class="bg-gray-800 w-full max-w-2xl p-8 rounded-2xl shadow-lg text-white">
             @csrf
 
-            <div class="mb-4">
-                <label class="block font-bold">Título</label>
-                <input type="text" name="titulo" class="w-full border p-2 rounded" required>
+            <h3 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2">Registrar Nuevo Proyecto</h3>
+
+            {{-- Título --}}
+            <div class="mb-5">
+                <label class="block mb-2 font-semibold">Título</label>
+                <input type="text" name="titulo"
+                       class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-white"
+                       value="{{ old('titulo') }}" required>
                 @error('titulo')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="mb-4">
-                <label class="block font-bold">Resumen</label>
-                <textarea name="resumen" class="w-full border p-2 rounded" rows="3"></textarea>
+            {{-- Resumen --}}
+            <div class="mb-5">
+                <label class="block mb-2 font-semibold">Resumen</label>
+                <textarea name="resumen"
+                          class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-white"
+                          rows="3">{{ old('resumen') }}</textarea>
                 @error('resumen')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="mb-4">
-                <label class="block font-bold">Fecha de Inicio</label>
-                <input type="date" name="fecha_inicio" class="w-full border p-2 rounded" required>
+            {{-- Fecha de Inicio --}}
+            <div class="mb-5">
+                <label class="block mb-2 font-semibold">Fecha de Inicio</label>
+                <input type="date" name="fecha_inicio"
+                       class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-white"
+                       value="{{ old('fecha_inicio') }}" required>
                 @error('fecha_inicio')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="mb-4">
-                <label class="block font-bold">Fecha de Fin</label>
-                <input type="date" name="fecha_fin" class="w-full border p-2 rounded">
+            {{-- Fecha de Fin --}}
+            <div class="mb-5">
+                <label class="block mb-2 font-semibold">Fecha de Fin</label>
+                <input type="date" name="fecha_fin"
+                       class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-white"
+                       value="{{ old('fecha_fin') }}">
                 @error('fecha_fin')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="mb-4">
-                <label class="block font-bold mb-2">Estado</label>
+            {{-- Estado --}}
+            <div class="mb-6">
+                <label class="block mb-2 font-semibold">Estado</label>
 
                 <div class="flex items-center space-x-4">
                     <label class="inline-flex items-center">
-                        <input type="radio" name="estado" value="Activo" class="form-radio text-blue-600" required>
+                        <input type="radio" name="estado" value="Activo" class="form-radio text-blue-600" required
+                               {{ old('estado') == 'Activo' ? 'checked' : '' }}>
                         <span class="ml-2">Activo</span>
                     </label>
 
                     <label class="inline-flex items-center">
-                        <input type="radio" name="estado" value="Finalizado" class="form-radio text-green-600">
+                        <input type="radio" name="estado" value="Finalizado" class="form-radio text-green-600"
+                               {{ old('estado') == 'Finalizado' ? 'checked' : '' }}>
                         <span class="ml-2">Finalizado</span>
                     </label>
 
                     <label class="inline-flex items-center">
-                        <input type="radio" name="estado" value="Suspendido" class="form-radio text-red-600">
+                        <input type="radio" name="estado" value="Suspendido" class="form-radio text-red-600"
+                               {{ old('estado') == 'Suspendido' ? 'checked' : '' }}>
                         <span class="ml-2">Suspendido</span>
                     </label>
                 </div>
 
                 @error('estado')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="mb-4">
-                <label class="block font-bold">Tipo de Proyecto</label>
-                <select name="id_tipo_proyecto" class="w-full border p-2 rounded" required>
+            {{-- Tipo de Proyecto --}}
+            <div class="mb-6">
+                <label class="block mb-2 font-semibold">Tipo de Proyecto</label>
+                <select name="id_tipo_proyecto"
+                        class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        required>
                     <option value="">Seleccione un tipo</option>
                     @foreach($tiposProyecto as $tipo)
-                        <option value="{{ $tipo->id }}">{{ $tipo->descripcion }}</option>
+                        <option value="{{ $tipo->id }}" {{ old('id_tipo_proyecto') == $tipo->id ? 'selected' : '' }}>
+                            {{ $tipo->descripcion }}
+                        </option>
                     @endforeach
                 </select>
                 @error('id_tipo_proyecto')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Guardar</button>
-            <a href="{{ route('proyectos.index') }}" class="ml-4 text-gray-700">Cancelar</a>
+            {{-- Botones --}}
+            <div class="flex justify-end space-x-4">
+                <a href="{{ route('proyectos.index') }}"
+                   class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 transition">
+                    Cancelar
+                </a>
+                <button type="submit"
+                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                    Guardar
+                </button>
+            </div>
         </form>
     </div>
 </x-app-layout>

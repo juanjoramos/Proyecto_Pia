@@ -1,52 +1,73 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Nuevo Programa</h2>
-
-        <a href="{{ route('dashboard') }}"
-            class="inline-block bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800 mb-4">
-            ← Volver al Menú Principal
-        </a>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-white leading-tight">Nuevo Programa</h2>
+            <a href="{{ route('dashboard') }}"
+               class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600 transition">
+                ← Volver al Menú Principal
+            </a>
+        </div>
     </x-slot>
 
-    <div class="py-12 px-6">
-        <form action="{{ route('programas.store') }}" method="POST" 
-              class="bg-white p-6 rounded shadow-md max-w-xl">
+    {{-- Quitamos min-h-screen para que el fondo no se extienda más allá de los botones --}}
+    <div class="py-12 px-6 flex justify-center bg-gray-900">
+        <form action="{{ route('programas.store') }}" method="POST"
+              class="bg-gray-800 w-full max-w-2xl p-8 rounded-2xl shadow-lg text-white">
             @csrf
 
-            <div class="mb-4">
-                <label class="block font-bold">Nombre</label>
-                <input type="text" name="nombre" class="w-full border p-2 rounded" required value="{{ old('nombre') }}">
+            <h3 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2">Registrar Nuevo Programa</h3>
+
+            {{-- Nombre --}}
+            <div class="mb-5">
+                <label class="block mb-2 font-semibold">Nombre del Programa</label>
+                <input type="text" name="nombre"
+                       class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-white"
+                       value="{{ old('nombre') }}" required>
                 @error('nombre')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="mb-4">
-                <label class="block font-bold">Código</label>
-                <input type="text" name="codigo" class="w-full border p-2 rounded" required value="{{ old('codigo') }}">
+            {{-- Código --}}
+            <div class="mb-5">
+                <label class="block mb-2 font-semibold">Código</label>
+                <input type="text" name="codigo"
+                       class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-white"
+                       value="{{ old('codigo') }}" required>
                 @error('codigo')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="mb-4">
-                <label class="block font-bold">Departamento</label>
-                <select name="departamento_id" class="w-full border p-2 rounded" required>
-                    <option value="">-- Seleccione un departamento --</option>
-                    @foreach ($departamentos as $departamento)
-                        <option value="{{ $departamento->departamento_id }}" 
-                            {{ old('departamento_id') == $departamento->departamento_id ? 'selected' : '' }}>
-                            {{ $departamento->nombre }}
+            {{-- Facultad --}}
+            <div class="mb-6">
+                <label class="block mb-2 font-semibold">Facultad</label>
+                <select name="facultad_id"
+                        class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
+                    <option value="">-- Seleccione una facultad --</option>
+                    @foreach ($facultades as $facultad)
+                        <option value="{{ $facultad->facultad_id }}"
+                            {{ old('facultad_id') == $facultad->facultad_id ? 'selected' : '' }}>
+                            {{ $facultad->nombre }}
                         </option>
                     @endforeach
                 </select>
-                @error('departamento_id')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @error('facultad_id')
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Guardar</button>
-            <a href="{{ route('programas.index') }}" class="ml-4 text-gray-700">Cancelar</a>
+            {{-- Botones --}}
+            <div class="flex justify-end space-x-4">
+                <a href="{{ route('programas.index') }}"
+                   class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 transition">
+                    Cancelar
+                </a>
+                <button type="submit"
+                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                    Guardar
+                </button>
+            </div>
         </form>
     </div>
 </x-app-layout>

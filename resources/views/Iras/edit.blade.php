@@ -1,65 +1,91 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Editar IRA</h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-white leading-tight">Editar IRA</h2>
+            <a href="{{ route('dashboard') }}"
+               class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600 transition">
+                ← Volver al Menú Principal
+            </a>
+        </div>
     </x-slot>
 
-    <div class="py-12 px-6">
-        <form action="{{ route('iras.update', $ira) }}" method="POST" class="bg-white p-6 rounded shadow-md max-w-xl">
-            @csrf
-            @method('PUT')
+    <div class="py-12 px-6 bg-gray-900 min-h-screen">
+        <div class="max-w-2xl mx-auto bg-gray-800 text-white p-8 rounded-2xl shadow-lg">
+            <form action="{{ route('iras.update', $ira) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-            <!-- Valor -->
-            <div class="mb-4">
-                <label for="valor" class="block font-bold">Valor</label>
-                <input id="valor" type="number" step="1" name="valor" value="{{ old('valor', intval($ira->valor)) }}" class="w-full border p-2 rounded" required>
-                @error('valor')
-                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+                <h3 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2">Actualizar IRA</h3>
 
-            <!-- Observaciones -->
-            <div class="mb-4">
-                <label for="observaciones" class="block font-bold">Observaciones</label>
-                <textarea id="observaciones" name="observaciones" rows="3" class="w-full border p-2 rounded">{{ old('observaciones', $ira->observaciones) }}</textarea>
-                @error('observaciones')
-                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+                {{-- Valor --}}
+                <div class="mb-5">
+                    <label for="valor" class="block mb-2 font-semibold">Valor</label>
+                    <input id="valor" type="number" step="1" name="valor"
+                           class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none text-white"
+                           value="{{ old('valor', intval($ira->valor)) }}" required>
+                    @error('valor')
+                        <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
 
-            <!-- Estudiante -->
-            <div class="mb-4">
-                <label for="estudiante_id" class="block font-bold">Estudiante</label>
-                <select id="estudiante_id" name="estudiante_id" class="w-full border p-2 rounded" required>
-                    <option value="">Selecciona un estudiante</option>
+                {{-- Observaciones --}}
+                <div class="mb-5">
+                    <label for="observaciones" class="block mb-2 font-semibold">Observaciones</label>
+                    <textarea id="observaciones" name="observaciones" rows="3"
+                              class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none text-white">{{ old('observaciones', $ira->observaciones) }}</textarea>
+                    @error('observaciones')
+                        <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                {{-- Estudiante --}}
+                <div class="mb-5">
+                    <label for="estudiante_id" class="block mb-2 font-semibold">Estudiante</label>
+                    <select id="estudiante_id" name="estudiante_id"
+                            class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg text-white focus:ring-2 focus:ring-green-500 focus:outline-none" required>
+                        <option value="">Selecciona un estudiante</option>
                         @foreach($estudiantes as $estudiante)
-                            <option value="{{ $estudiante->estudiante_id }}" {{ old('estudiante_id', $ira->estudiante_id) == $estudiante->estudiante_id ? 'selected' : '' }}>
+                            <option value="{{ $estudiante->estudiante_id }}"
+                                {{ old('estudiante_id', $ira->estudiante_id) == $estudiante->estudiante_id ? 'selected' : '' }}>
                                 {{ $estudiante->nombre }}
                             </option>
                         @endforeach
-                </select>
-                @error('estudiante_id')
-                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+                    </select>
+                    @error('estudiante_id')
+                        <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
 
-            <!-- Era -->
-            <div class="mb-4">
-                <label for="era_id" class="block font-bold">Era</label>
-                <select id="era_id" name="era_id" class="w-full border p-2 rounded" required>
-                    <option value="">Selecciona una era</option>
-                    @foreach($eras as $era)
-                        <option value="{{ $era->era_id }}" {{ old('era_id', $ira->era_id) == $era->era_id ? 'selected' : '' }}>
-                            {{ $era->nombre }}
-                        </option>
-                    @endforeach
-                </select>
-                @error('era_id')
-                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+                {{-- Era --}}
+                <div class="mb-6">
+                    <label for="era_id" class="block mb-2 font-semibold">Era</label>
+                    <select id="era_id" name="era_id"
+                            class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg text-white focus:ring-2 focus:ring-green-500 focus:outline-none" required>
+                        <option value="">Selecciona una era</option>
+                        @foreach($eras as $era)
+                            <option value="{{ $era->era_id }}"
+                                {{ old('era_id', $ira->era_id) == $era->era_id ? 'selected' : '' }}>
+                                {{ $era->nombre }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('era_id')
+                        <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
 
-            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Actualizar</button>
-            <a href="{{ route('iras.index') }}" class="ml-4 text-gray-700">Cancelar</a>
-        </form>
+                {{-- Botones --}}
+                <div class="flex justify-end space-x-4">
+                    <a href="{{ route('iras.index') }}"
+                       class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 transition">
+                        Cancelar
+                    </a>
+                    <button type="submit"
+                            class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                        Actualizar
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </x-app-layout>

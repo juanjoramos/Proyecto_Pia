@@ -3,22 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Programa;
-use App\Models\Departamento;
+use App\Models\Facultad;
 use Illuminate\Http\Request;
 
 class ProgramaController extends Controller
 {
     public function index()
     {
-        // Traemos programas con su departamento relacionado
-        $programas = Programa::with('departamento')->get();
+        // Traemos programas con su facultad relacionada
+        $programas = Programa::with('facultad')->get();
         return view('programas.index', compact('programas'));
     }
 
     public function create()
     {
-        $departamentos = Departamento::all();
-        return view('programas.create', compact('departamentos'));
+        $facultades = Facultad::all();
+        return view('programas.create', compact('facultades'));
     }
 
     public function store(Request $request)
@@ -26,19 +26,18 @@ class ProgramaController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'codigo' => 'required|string|max:50|unique:programas,codigo',
-            'departamento_id' => 'required|exists:departamentos,departamento_id',
+            'facultad_id' => 'required|exists:facultades,facultad_id',
         ]);
 
-        Programa::create($request->only('nombre', 'codigo', 'departamento_id'));
+        Programa::create($request->only('nombre', 'codigo', 'facultad_id'));
 
         return redirect()->route('programas.index')->with('success', 'Programa creado exitosamente.');
     }
 
-    // Route Model Binding con clave primaria 'programa_id'
     public function edit(Programa $programa)
     {
-        $departamentos = Departamento::all();
-        return view('programas.edit', compact('programa', 'departamentos'));
+        $facultades = Facultad::all();
+        return view('programas.edit', compact('programa', 'facultades'));
     }
 
     public function update(Request $request, Programa $programa)
@@ -46,10 +45,10 @@ class ProgramaController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'codigo' => 'required|string|max:50|unique:programas,codigo,' . $programa->programa_id . ',programa_id',
-            'departamento_id' => 'required|exists:departamentos,departamento_id',
+            'facultad_id' => 'required|exists:facultades,facultad_id',
         ]);
 
-        $programa->update($request->only('nombre', 'codigo', 'departamento_id'));
+        $programa->update($request->only('nombre', 'codigo', 'facultad_id'));
 
         return redirect()->route('programas.index')->with('success', 'Programa actualizado exitosamente.');
     }

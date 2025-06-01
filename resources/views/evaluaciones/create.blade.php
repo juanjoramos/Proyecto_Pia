@@ -1,29 +1,64 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Nueva Evaluación</h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-white leading-tight">Nueva Evaluación</h2>
+            <a href="{{ route('dashboard') }}"
+               class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600 transition">
+                ← Volver al Menú Principal
+            </a>
+        </div>
     </x-slot>
 
-    <div class="py-12 px-6">
-        <form action="{{ route('evaluaciones.store') }}" method="POST" class="bg-white p-6 rounded shadow-md max-w-xl">
+    <div class="py-12 px-6 flex justify-center bg-gray-900">
+        <form action="{{ route('evaluaciones.store') }}" method="POST"
+              class="bg-gray-800 w-full max-w-2xl p-8 rounded-2xl shadow-lg text-white">
             @csrf
 
-            <div class="mb-4">
-                <label class="block font-bold">Criterio</label>
-                <input type="text" name="criterio" class="w-full border p-2 rounded" required value="{{ old('criterio') }}">
+            <h3 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2">Registrar Evaluación</h3>
+
+            {{-- Criterio --}}
+            <div class="mb-5">
+                <label for="criterio" class="block mb-2 font-semibold">Criterio</label>
+                <input id="criterio" type="text" name="criterio"
+                       class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                       value="{{ old('criterio') }}" required>
+                @error('criterio')
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
-            <div class="mb-4">
-                <label class="block font-bold">Calificación</label>
-                <input type="number" name="calificacion" min="0" max="5" class="w-full border p-2 rounded" required value="{{ old('calificacion') }}">
+            {{-- Calificación --}}
+            <div class="mb-5">
+                <label for="calificacion" class="block mb-2 font-semibold">Calificación (0 - 5)</label>
+                <input id="calificacion" type="number" name="calificacion" min="0" max="5" step="0.1"
+                       class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                       value="{{ old('calificacion') }}" required>
+                @error('calificacion')
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
-            <div class="mb-4">
-                <label class="block font-bold">Observaciones</label>
-                <textarea name="observaciones" class="w-full border p-2 rounded">{{ old('observaciones') }}</textarea>
+            {{-- Observaciones --}}
+            <div class="mb-6">
+                <label for="observaciones" class="block mb-2 font-semibold">Observaciones</label>
+                <textarea id="observaciones" name="observaciones" rows="4"
+                          class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">{{ old('observaciones') }}</textarea>
+                @error('observaciones')
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Guardar</button>
-            <a href="{{ route('evaluaciones.index') }}" class="ml-4 text-gray-700">Cancelar</a>
+            {{-- Botones --}}
+            <div class="flex justify-end space-x-4">
+                <a href="{{ route('evaluaciones.index') }}"
+                   class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 transition">
+                    Cancelar
+                </a>
+                <button type="submit"
+                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                    Guardar
+                </button>
+            </div>
         </form>
     </div>
 </x-app-layout>

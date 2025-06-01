@@ -1,26 +1,38 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Editar Departamento</h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-white leading-tight">Editar Departamento</h2>
+            <a href="{{ route('dashboard') }}"
+               class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600 transition">
+                ← Volver al Menú Principal
+            </a>
+        </div>
     </x-slot>
 
-    <div class="py-12 px-6">
-        <form action="{{ route('departamentos.update', $departamento) }}" method="POST" 
-              class="bg-white p-6 rounded shadow-md max-w-xl">
+    <div class="py-12 px-6 flex justify-center bg-gray-900">
+        <form action="{{ route('departamentos.update', $departamento) }}" method="POST"
+              class="bg-gray-800 w-full max-w-2xl p-8 rounded-2xl shadow-lg text-white">
             @csrf
             @method('PUT')
 
-            <div class="mb-4">
-                <label class="block font-bold">Nombre</label>
-                <input type="text" name="nombre" value="{{ old('nombre', $departamento->nombre) }}" 
-                       class="w-full border p-2 rounded" required>
+            <h3 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2">Editar Departamento</h3>
+
+            {{-- Nombre --}}
+            <div class="mb-5">
+                <label class="block mb-2 font-semibold">Nombre del Departamento</label>
+                <input type="text" name="nombre"
+                       class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-white"
+                       value="{{ old('nombre', $departamento->nombre) }}" required>
                 @error('nombre')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="mb-4">
-                <label class="block font-bold">Facultad</label>
-                <select name="facultad_id" class="w-full border p-2 rounded" required>
+            {{-- Facultad --}}
+            <div class="mb-6">
+                <label class="block mb-2 font-semibold">Facultad</label>
+                <select name="facultad_id"
+                        class="w-full bg-gray-700 border border-gray-600 px-4 py-2 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none" required>
                     <option value="">-- Seleccione una facultad --</option>
                     @foreach ($facultades as $facultad)
                         <option value="{{ $facultad->facultad_id }}"
@@ -30,12 +42,21 @@
                     @endforeach
                 </select>
                 @error('facultad_id')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Actualizar</button>
-            <a href="{{ route('departamentos.index') }}" class="ml-4 text-gray-700">Cancelar</a>
+            {{-- Botones --}}
+            <div class="flex justify-end space-x-4">
+                <a href="{{ route('departamentos.index') }}"
+                   class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 transition">
+                    Cancelar
+                </a>
+                <button type="submit"
+                        class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                    Actualizar
+                </button>
+            </div>
         </form>
     </div>
 </x-app-layout>

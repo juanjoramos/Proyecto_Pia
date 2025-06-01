@@ -12,11 +12,11 @@ class CreateProgramasTable extends Migration
             $table->id('programa_id');
             $table->string('nombre');
             $table->string('codigo')->unique();
-            $table->unsignedBigInteger('departamento_id');
+            $table->unsignedBigInteger('facultad_id');
 
-            $table->foreign('departamento_id')
-                  ->references('departamento_id')
-                  ->on('departamentos')
+            $table->foreign('facultad_id')
+                  ->references('facultad_id')
+                  ->on('facultades')
                   ->onDelete('cascade');
 
             $table->timestamps();

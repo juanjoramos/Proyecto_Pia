@@ -12,19 +12,18 @@ class Programa extends Model
     protected $table = 'programas';
     protected $primaryKey = 'programa_id';
 
-    // Definimos el tipo de clave primaria y si es autoincremental
     protected $keyType = 'int';
     public $incrementing = true;
 
     protected $fillable = [
         'nombre',
         'codigo',
-        'departamento_id',
+        'facultad_id',
     ];
 
-    // Relación con Departamento
-    public function departamento()
+    // Relación con Facultad (actualizado)
+    public function facultad()
     {
-        return $this->belongsTo(Departamento::class, 'departamento_id');
+        return $this->belongsTo(Facultad::class, 'facultad_id');
     }
 }
