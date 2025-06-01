@@ -1,5 +1,11 @@
 <x-guest-layout>
         <div class="w-full max-w-sm bg-gray-800 text-white rounded-xl shadow-lg p-6">
+
+                <!-- Imagen arriba del formulario -->
+        <div class="flex justify-center mb-3">
+            <img src="{{ asset('images/Logo_1.png') }}" alt="Descripción" class="h-24 w-auto rounded-md filter brightness-0 invert" />
+        </div>
+
             <div class="text-center mb-4">
                 <h2 class="text-2xl font-bold">¡Bienvenido!</h2>
                 <p class="text-sm text-gray-400">Inicia sesión para acceder al sistema</p>
